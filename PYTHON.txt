@@ -1,0 +1,211 @@
+
+                                                     1.TO-DO LIST APPLICATION
+
+
+
+To create a command-line to-do list application in Python, you can use the following code. This application allows users to add tasks, delete tasks, mark tasks as completed, and view the current list of tasks. 
+
+python
+tasks = []
+
+def print_tasks():
+    if not tasks:
+        print("No tasks")
+    else:
+        for index, task in enumerate(tasks, start=1):
+            status = "✓" if task["completed"] else " "
+            print(f"{index}. [{status}] {task['name']}")
+
+def add_task(name):
+    tasks.append({"name": name, "completed": False})
+    print("Task added successfully")
+
+def delete_task(index):
+    try:
+        del tasks[index]
+        print("Task deleted successfully")
+    except IndexError:
+        print("Invalid task index")
+
+def mark_as_completed(index):
+    try:
+        tasks[index]["completed"] = True
+        print("Task marked as completed")
+    except IndexError:
+        print("Invalid task index")
+
+while True:
+    print("\n1. Add task")
+    print("2. Delete task")
+    print("3. Mark as completed")
+    print("4. View tasks")
+    print("5. Exit")
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        task_name = input("Enter task name: ")
+        add_task(task_name)
+    elif choice == "2":
+        task_index = int(input("Enter task index to delete: ")) - 1
+        delete_task(task_index)
+    elif choice == "3":
+        task_index = int(input("Enter task index to mark as completed: ")) - 1
+        mark_as_completed(task_index)
+    elif choice == "4":
+        print_tasks()
+    elif choice == "5":
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+
+
+
+
+
+
+
+
+                                                             1.WEATHER APP
+
+
+
+To develop a Python program that retrieves weather information using an API and displays it to the user, you can use the requests library to make API requests and retrieve the weather data. Here's a basic example using the OpenWeatherMap API:
+
+python
+import requests
+
+def get_weather(city):
+    api_key = 'YOUR_API_KEY_HERE'  # Replace with your OpenWeatherMap API key
+    base_url = 'http://api.openweathermap.org/data/2.5/weather'
+    params = {'q': city, 'appid': api_key, 'units': 'metric'}
+    response = requests.get(base_url, params=params)
+    data = response.json()
+
+    if data['cod'] == 200:
+        weather_description = data['weather'][0]['description']
+        temperature = data['main']['temp']
+        humidity = data['main']['humidity']
+        wind_speed = data['wind']['speed']
+        return f"Weather in {city}: {weather_description}, Temperature: {temperature}°C, Humidity: {humidity}%, Wind Speed: {wind_speed} m/s"
+    else:
+        return f"Error: City '{city}' not found. Please check the city name and try again."
+
+if __name__ == '__main__':
+    city = input("Enter city name: ")
+    print(get_weather(city))
+
+
+Replace 'YOUR_API_KEY_HERE' with your actual OpenWeatherMap API key. You can sign up for a free API key at [OpenWeatherMap](https://openweathermap.org/api).
+
+This program allows users to input a city name and retrieves the current weather conditions for that city, including weather description, temperature, humidity, and wind speed
+
+
+
+
+
+
+
+
+
+                                                                 1.EXPENSE TRACKER
+
+
+
+
+
+
+To build an expense tracking system with the described functionalities, you can follow these steps:
+
+1. *Design the Database Schema:* Create tables to store user information, expense details, and categories.
+   
+2. *Implement User Authentication:* Allow users to sign up, log in, and manage their accounts.
+
+3. *Create a Form to Add Expenses:* Users should be able to input details like date, amount, category, and description for each expense.
+
+4. *Implement Expense Categories:* Users should be able to categorize their expenses (e.g., food, transportation, utilities).
+
+5. *Display Expenses:* Show a list of expenses with options to edit or delete them.
+
+6. *Generate Reports:* Provide users with reports and graphs to visualize their spending patterns over time.
+
+7. *Add Security Measures:* Ensure that sensitive user information is securely stored and transmitted.
+
+8. *Testing and Deployment:* Test the application thoroughly before deploying it to production.
+
+
+
+
+
+
+                                                         1.CHATBOT
+
+
+
+
+
+
+
+To develop a simple chatbot using natural language processing (NLP) libraries, you can use Python along with libraries such as NLTK (Natural Language Toolkit) or spaCy for NLP tasks. Here's a basic example of a chatbot that can answer basic questions and engage in a conversation:
+
+python
+import nltk
+from nltk.chat.util import Chat, reflections
+
+# Define the chatbot responses
+pairs = [
+    [
+        r"my name is (.*)",
+        ["Hello %1, how can I help you today?",]
+    ],
+    [
+        r"what is your name?",
+        ["My name is Chatbot. How can I assist you?",]
+    ],
+    [
+        r"how are you ?",
+        ["I'm doing well. Thank you for asking.",]
+    ],
+    [
+        r"sorry (.*)",
+        ["No problem, please go ahead.",]
+    ],
+    [
+        r"(.*) (location|city) ?",
+        ['I am a chatbot, so I do not have a physical location. However, I am here to assist you.',]
+    ],
+    [
+        r"(.*) created ?",
+        ["I was created by a developer using Python's NLTK library.",]
+    ],
+    [
+        r"(.*) help (.*)",
+        ["Sure, I can help you with that. What do you need assistance with?",]
+    ],
+    [
+        r"quit",
+        ["Thank you for chatting. Have a great day!",]
+    ],
+]
+
+# Create a chatbot using the pairs defined above
+def chatbot():
+    print("Hello! I'm a simple chatbot. You can start chatting with me or type 'quit' to exit.")
+    chat = Chat(pairs, reflections)
+    while True:
+        user_input = input("You: ")
+        response = chat.respond(user_input)
+        print("Chatbot:", response)
+        if user_input == 'quit':
+            break
+
+# Run the chatbot
+if __name__ == "__main__":
+    chatbot()
+
+
+You can expand the pairs list with more patterns and responses to make the chatbot more interactive and capable of handling a wider range of conversations
+
+
+
+
